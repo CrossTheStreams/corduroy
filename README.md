@@ -14,9 +14,9 @@ As I write this, this isn't really intended to be useful for anyone other than m
 
 # Data Structures
 
-## Queue
+### Queue
 
-## Stack
+### Stack
 
 ## Trees
 
