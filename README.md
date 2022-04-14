@@ -8,23 +8,34 @@
 
 # What is this?
 
-This is a personal project that aims to be a space where I implement data structures and algorithms in Ruby. I've visited these topics in my time in software, but really retaining that knowledge and diving deeper is still on the todo list. As in all disciplines, deliberate practice makes for progress.
+This is a personal project that aims to be a space where I implement data structures and algorithms in Ruby. 
 
-As I write this, this isn't really intended to be useful for anyone! :)
+As I write this, this isn't really intended to be useful for anyone other than myself, but hey maybe it will be!
 
 # Data Structures
 
-Data structures will be added to this list as they are added to the project. The unit tests for these structures will confirm and demonstrate their behaviors.
+## Queue
+
+## Stack
+
+## Trees
+
+### MinHeap
 
 # Algorithms
 
+## Search
 
+### Binary Search
 
-## Sorting Algorithms
+## Sorting
 
 ### Bubblesort
 
-### Quicksort
+### Insertion Sort
 
-`Corduroy::Algo::Sorts::Quicksort.new().perform`
+### Selection Sort
 
+### Merge Sort
+
+### Quick Sort
