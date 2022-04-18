@@ -50,9 +50,11 @@ class TestStack < Minitest::Test
         if CLOSED_BRACKETS.include?(s)
           if !@stack.empty?
             top = @stack.pop
-            if (s == "}" && top != "{") || (s == "]" && top != "[") || (s == ")" && top != "(") 
+            if (s == "}" && top != "{") || (s == "]" && top != "[") || (s == ")" && top != "(")
               raise InvalidDelimiterError, "Invalid delimiter => #{s} at index #{idx}"
             end
+          else
+            raise InvalidDelimiterError, "Brackets ended prematurely => #{s} at index #{idx}"
           end
         end
       end
@@ -66,6 +68,9 @@ class TestStack < Minitest::Test
 
     checker = BracketChecker.new(string: "a{l(l[g]o)o}d!")
     assert checker.validate!
+
+    checker = BracketChecker.new(string: "()))")
+    assert_raises(BracketChecker::InvalidDelimiterError) { checker.validate! }
   end
 
   # Stacks can be useful for solving a problem
