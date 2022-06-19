@@ -1,6 +1,5 @@
 # typed: true
 require "sorbet-runtime"
-require 'pry'
 
 module Corduroy
   module Trees

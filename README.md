@@ -22,6 +22,8 @@ As I write this, this isn't really intended to be useful for anyone other than m
 
 ### MinHeap
 
+### Trie
+
 # Algorithms
 
 ## Search

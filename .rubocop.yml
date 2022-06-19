@@ -10,6 +10,9 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
 Style/ConditionalAssignment:
   Enabled: false
 
@@ -20,6 +23,9 @@ Style/AccessorGrouping:
   Enabled: false
 
 Style/BlockComments:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
 
 Style/GuardClause:

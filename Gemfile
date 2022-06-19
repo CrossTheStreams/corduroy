@@ -12,7 +12,6 @@ gem "minitest-reporters", group: :development
 
 gem "rubocop", "~> 1.21"
 
-gem "pry"
 
 gem 'sorbet', :group => :development
 gem 'sorbet-runtime'

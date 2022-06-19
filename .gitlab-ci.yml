@@ -1,0 +1,13 @@
+default:
+  image: ruby:3.1.1
+
+stages:
+  - test
+
+test-job:
+  stage: test
+  script:
+    - echo "Run bundle install"
+    - bundle install
+    - echo "Run unit tests:"
+    - bundle exec rake test

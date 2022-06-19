@@ -8,4 +8,4 @@ require "minitest/benchmark"
 require "minitest/reporters"
 require "sorbet-runtime"
 
-Minitest::Reporters.use!
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]

@@ -2,7 +2,6 @@
 require "test_helper"
 require "corduroy/trees/min_heap"
 
-# A test of BinarySearch
 class TestMinHeap < Minitest::Test
   def setup
     @min_heap = Corduroy::Trees::MinHeap.new(max_size: 100)
@@ -11,7 +10,7 @@ class TestMinHeap < Minitest::Test
   def test_insert
     (0..99).to_a.shuffle.each {|n| @min_heap.insert(n) }
     vals = []
-    100.times { |i| vals << @min_heap.extract! }
+    100.times { vals << @min_heap.extract! }
     assert_equal vals, (0..99).to_a
   end
 

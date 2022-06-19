@@ -9,18 +9,8 @@
 #
 # corduroy-0.1.0
 
-class TestStack < Minitest::Test
+class TestTrie < Minitest::Test
   def setup; end
-  def stack_fibonacci(fib_n); end
-  def test_bracket_checker; end
-  def test_fibonacci; end
-  def test_reverse_a_word; end
-  def test_stack; end
-  extend T::Sig
-end
-class TestStack::BracketChecker
-  def initialize(string:); end
-  def validate!; end
-end
-class TestStack::BracketChecker::InvalidDelimiterError < StandardError
+  def test_search; end
+  def test_starts_with; end
 end
