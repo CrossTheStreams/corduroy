@@ -6,11 +6,8 @@ module Corduroy
   module Trees
     # An implementation of a min heap
     # https://en.wikipedia.org/wiki/?curid=13996
-    class MinHeap
+    class MaxHeap
       extend T::Sig
-
-      class MaxSizeError < StandardError
-      end
 
       sig { returns(Array) }
       attr_reader :array
@@ -20,13 +17,13 @@ module Corduroy
         @array = []
       end
 
-      sig { params(array: Array).returns(Corduroy::Trees::MinHeap) }
+      sig { params(array: Array).returns(Corduroy::Trees::MaxHeap) }
       def self.heapify(array)
-        min_heap = Corduroy::Trees::MinHeap.new
-        min_heap.instance_variable_set(:@array, array)
-        min_heap.instance_variable_set(:@current_size, array.length)
-        min_heap.heapify_array(index: 0)
-        min_heap
+        max_heap = Corduroy::Trees::MaxHeap.new
+        max_heap.instance_variable_set(:@array, array)
+        max_heap.instance_variable_set(:@current_size, array.length)
+        max_heap.heapify_array(index: 0)
+        max_heap
       end
 
       sig { params(value: Integer).returns(Integer) }
@@ -54,7 +51,7 @@ module Corduroy
         old_value = @array[index]
         @array[index] = new_value
 
-        if old_value > new_value
+        if old_value < new_value
           trickle_up(index: index)
         else
           trickle_down(index: index)
@@ -75,7 +72,7 @@ module Corduroy
       end
 
       def to_s
-        "#<Corduroy::Trees::MinHeap #{@array} >"
+        "#<Corduroy::Trees::MaxHeap #{@array} >"
       end
 
       private
@@ -83,33 +80,32 @@ module Corduroy
       # index is the index of the item we're removing
       sig { params(index: Integer).void }
       def trickle_down(index:)
-        # puts "tricket_down index => #{index}"
-        smaller_child = 0
+        larger_child = 0
         # root
         top = @array[index]
 
         # while node has at least one child
         while index < @current_size / 2
-          # find the smaller child
+          # find the larger child
           left_child = 2 * index + 1
           right_child = left_child + 1
 
-          if right_child < @current_size && @array[left_child] > @array[right_child]
-            smaller_child = right_child
+          if right_child < @current_size && @array[right_child] > @array[left_child]
+            larger_child = right_child
           else
-            smaller_child = left_child
+            larger_child = left_child
           end
 
-          # top is smaller, nothing to do
-          if top <= @array[smaller_child]
+          # top is bigger, nothing to do
+          if top >= @array[larger_child]
             break
           end
 
-          # shift child up, it's smaller
-          @array[index] = @array[smaller_child]
+          # shift child up, it's bigger
+          @array[index] = @array[larger_child]
 
           # go down
-          index = smaller_child
+          index = larger_child
         end
 
         @array[index] = top
@@ -123,7 +119,7 @@ module Corduroy
         bottom = @array[index]
 
         if bottom
-          while index > 0 && @array[parent] > bottom
+          while index > 0 && @array[parent] < bottom
             @array[index] = @array[parent]
             index = parent
             parent = (parent - 1) / 2 # parent equals grandpa

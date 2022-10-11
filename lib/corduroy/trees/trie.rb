@@ -1,4 +1,3 @@
-# typed: false
 module Corduroy
   module Trees
     # An implementation of a trie
@@ -35,7 +34,7 @@ module Corduroy
           node = node.paths[chars += char]
           return false if node.nil?
         end
-        !!node&.word?
+        node&.word?
       end
 
       def starts_with(prefix)
