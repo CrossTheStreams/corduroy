@@ -1,4 +1,5 @@
 # typed: true
+
 require "sorbet-runtime"
 
 module Corduroy
@@ -7,29 +8,22 @@ module Corduroy
   class Stack
     extend T::Sig
 
-    sig { returns(Integer) }
-    attr_reader :max_size
-
     sig { returns(Array) }
     attr_reader :array
 
     sig { returns(Integer) }
     attr_reader :top
 
-    sig { params(max_size: Integer).void }
-    def initialize(max_size:)
-      @max_size = max_size
+    sig { void }
+    def initialize
       @array = []
       @top = -1
     end
 
-    class Overflow < StandardError; end
     class Underflow < StandardError; end
 
     sig { params(item: T.untyped).returns(T.untyped) }
     def push(item)
-      raise Overflow, "Cannot add item beyond Stack's max_size" if @top + 1 == @max_size 
-
       # We increment the top of the stack, then add new item
       @top += 1
       @array[@top] = item
@@ -54,11 +48,6 @@ module Corduroy
     sig { returns(T::Boolean) }
     def empty?
       @top == -1
-    end
-
-    sig { returns(T::Boolean) }
-    def full?
-      @top == @max_size - 1
     end
   end
 end

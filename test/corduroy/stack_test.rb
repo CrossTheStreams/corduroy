@@ -1,4 +1,5 @@
 # typed: true
+
 require "test_helper"
 require "corduroy/stack"
 
@@ -7,14 +8,13 @@ class TestStack < Minitest::Test
   extend T::Sig
 
   def setup
-    @stack = Corduroy::Stack.new(max_size: 10)
+    @stack = Corduroy::Stack.new
   end
 
   def test_stack
     (1..10).each do |n|
       @stack.push(n)
     end
-    assert_raises(Corduroy::Stack::Overflow) { @stack.push(11) }
     10.times { @stack.pop }
     assert_raises(Corduroy::Stack::Underflow) { @stack.pop }
   end
@@ -41,7 +41,7 @@ class TestStack < Minitest::Test
 
     def initialize(string:)
       @string = string
-      @stack = Corduroy::Stack.new(max_size: @string.length)
+      @stack = Corduroy::Stack.new
     end
 
     def validate!
@@ -78,11 +78,11 @@ class TestStack < Minitest::Test
   def stack_fibonacci(fib_n)
     # Fibonacci series:
     # 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
-    stack = Corduroy::Stack.new(max_size: 2)
+    stack = Corduroy::Stack.new
     stack.push(0) # first item in the series
     stack.push(1) # second item in the series
     num = T.let(0, T.untyped)
-    (fib_n - stack.max_size).times do
+    (fib_n - 2).times do
       b = stack.pop
       a = stack.pop
       c = a + b

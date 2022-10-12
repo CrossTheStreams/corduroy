@@ -4,7 +4,7 @@ require "sorbet-runtime"
 
 module Corduroy
   module Trees
-    # An implementation of a min heap
+    # An implementation of a max heap
     # https://en.wikipedia.org/wiki/?curid=13996
     class MaxHeap
       extend T::Sig
