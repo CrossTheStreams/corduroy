@@ -5,6 +5,7 @@ require "corduroy/stack"
 
 module Corduroy
   module Trees
+    # https://en.wikipedia.org/wiki/Binary_search_tree
     class BinarySearchTree
       extend T::Sig
 
@@ -142,11 +143,8 @@ module Corduroy
       # get items in tree in ascending order
       sig { returns(T::Enumerator[Comparable]) }
       def inorder_traversal
-        return Enumerator.new {} if @root.nil?
-
-        current = T.let(@root, T.nilable(Node)) # set current to root node
-        Enumerator.new { |yielder| inorder(current, yielder) }
-        # NOTE: alternative stack based approach to inorder traversal
+        traversal(:inorder)
+        # NOTE: for reference, an alternative stack based approach to inorder traversal:
         # stack = Corduroy::Stack.new # init stack
         # current = T.let(@root, T.nilable(Node)) # set current to root node
         # Enumerator.new do |yielder|
@@ -177,23 +175,24 @@ module Corduroy
       # used to copy the tree
       sig { returns(T::Enumerator[Comparable]) }
       def preorder_traversal
-        return Enumerator.new {} if @root.nil?
-
-        current = T.let(@root, T.nilable(Node)) # set current to root node
-        Enumerator.new { |yielder| preorder(current, yielder) }
+        traversal(:preorder)
       end
 
       # left, right, root
       # used to delete the tree
       sig { returns(T::Enumerator[Comparable]) }
       def postorder_traversal
-        return Enumerator.new {} if @root.nil?
-
-        current = T.let(@root, T.nilable(Node)) # set current to root node
-        Enumerator.new { |yielder| postorder(current, yielder) }
+        traversal(:postorder)
       end
 
       private
+
+      sig { params(traversal_method: Symbol).returns(T::Enumerator[Comparable]) }
+      def traversal(traversal_method)
+        return Enumerator.new {} if @root.nil?
+
+        Enumerator.new { |yielder| send(traversal_method, @root, yielder) }
+      end
 
       sig { params(node: T.nilable(Node), yielder: Enumerator::Yielder).void }
       def inorder(node, yielder)

@@ -35,7 +35,6 @@ class TestBinarySearchTree < Minitest::Test
     assert_equal((1..10).to_a, @bst.inorder_traversal.to_a)
 
     assert(@bst.delete(3))
-    three_deleted_arr = (1..10).to_a.reject { |n| n == 3 }
-    assert_equal(three_deleted_arr, @bst.inorder_traversal.to_a)
+    refute(@bst.inorder_traversal.to_a.include?(3))
   end
 end
